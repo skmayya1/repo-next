@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Karla', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+::-moz-selection {
+  color: black;
+  background: #EFE6DD;
+}
+
+::selection {
+  color: black;
+    background: #EFE6DD;
+}
