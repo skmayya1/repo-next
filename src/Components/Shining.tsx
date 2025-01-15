@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { GiFallingStar } from "react-icons/gi";
 import { IoIosArrowForward } from "react-icons/io";
 import Card from "./Card";
+import Link from "next/link";
 
 export interface IProject {
     id: number,
@@ -31,8 +32,8 @@ const Shining = () => {
                     throw new Error(`HTTP error! status: ${res.status}`);
                 }
                 const data = await res.json();
-                setData(data.items?.slice(0, 8) || []); // Slice to get top 8 elements
-                console.log(data.items?.slice(0, 8));
+                setData(data); // Slice to get top 8 elements
+                console.log(data);
                 
             } catch (err) {
                 console.log(err);
@@ -53,12 +54,12 @@ const Shining = () => {
                     Shining Stars
                     <GiFallingStar className="-rotate-90" size={25} color="yellow" />
                 </h1>
-                <p className="font-light text-base flex items-center cursor-pointer gap-1">
+                <Link href='/projects' className="font-light text-base flex items-center cursor-pointer gap-1">
                     View More
                     <IoIosArrowForward size={18} />
-                </p>
+                </Link>
             </div>
-            <div className="grid grid-cols-4 h-full overflow-hidden my-5 gap-5">
+            <div className="grid grid-cols-1 md:grid-cols-4 h-full  my-5 gap-5">
                 {Data && Data.map((item) => (
                     <Card
                         Data={{

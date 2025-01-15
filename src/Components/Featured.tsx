@@ -28,7 +28,7 @@ const Featured = () => {
                   <IoIosArrowForward size={18} />
               </p> */}
           </div>
-          <div className="grid grid-cols-4 h-full overflow-hidden my-5 gap-5">
+          <div className="grid grid-cols-4 h-full my-5 gap-5">
               <Card Data={dummyData} />
               <p className='text-zinc-500 font-normal self-center'>* Contact to get featured</p>
           </div>

@@ -4,9 +4,10 @@ export async function GET() {
     try {
         const res = await fetch('https://api.github.com/search/repositories?q=stars:>100000&sort=stars&order=desc')
         const data = await res.json()
-        console.log(data.items[0]);
+        const filteredData = data.items.filter((item: { language:string | null; }) => item.language !== null)
+        console.log(filteredData);
         
-        return NextResponse.json(data)
+        return NextResponse.json(filteredData.slice(0, 8))
     } catch (error) {
         console.error(error)
         return NextResponse.json({ error: "An error occurred" }, { status: 500 })
