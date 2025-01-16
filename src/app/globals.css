@@ -20,3 +20,12 @@ html {
   color: black;
     background: #EFE6DD;
 }
+
+.bg-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent overlay */
+  pointer-events: none;
+  /* Prevent interactions */
+  position: fixed;
+
+}

@@ -3,11 +3,20 @@ import DarkModeToggle from "./Toggle";
 import { IoIosSearch } from "react-icons/io";
 import { BsShiftFill } from "react-icons/bs";
 import { useEffect } from "react";
+import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import Image from "next/image";
+import { useModal } from "@/Contexts/ModalContext";
+
+
 
 const Navbar = () => {
+
+
+  const { user, isLoading } = useKindeBrowserClient();
+  const { AuthModalOpen, SearchModalOpen, setAuthModalOpenHandler, setSearchModalOpenHandler } = useModal();
+  
   const OnSearch = () => { 
-    alert("modal on/off");
-    
+    setSearchModalOpenHandler(!SearchModalOpen);
   };
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === "Shift") {
@@ -37,7 +46,21 @@ const Navbar = () => {
           <RiGithubFill size={22} />
         </button>
         <DarkModeToggle />
+        {
+          !isLoading && <div className="flex items-center">
+            {
+              user ? <div className="">
+                        <Image src={user.picture as string} alt="user" width={40} height={40} className="rounded-full"/>
+                    </div>
+                :
+                <button
+                  className="p-1.5 dark: dark:text-black dark:bg-[#EFE6DD] rounded-lg active:scale-95 transition-transform dark:active:bg-[#EAF2E3]" 
+                  onClick={() => setAuthModalOpenHandler(!AuthModalOpen)}>Signin</button>
+            }
+          </div>
+        }
       </div>
+      
     </div>
   );
 };

@@ -4,11 +4,13 @@ import Shining from "@/Components/Shining"
 import "./globals.css"
 import Featured from "@/Components/Featured"
 import About from "@/Components/About"
+import { useModal } from "@/Contexts/ModalContext"
+import AuthModal from "@/Components/AuthModal"
 
 const App = () => {
-
+  const { AuthModalOpen ,SearchModalOpen } = useModal();
   return (
-    <div className="min-h-screen w-full dark:bg-zinc-900 dark:text-[#EFE6DD] text-[#584B53] bg-[#FEF5EF] flex flex-col justify-start items-center ">
+    <div  className={`min-h-screen w-full dark:bg-zinc-900 dark:text-[#EFE6DD] text-[#584B53] bg-[#FEF5EF] flex flex-col justify-start items-center relative ${AuthModalOpen || SearchModalOpen ? 'bg-overlay':''}`}>
       <div className="w-full flex items-center justify-center">
         <Navbar />
       </div>
@@ -20,7 +22,10 @@ const App = () => {
       </div>
       <Shining />
       <Featured />
-      <About/>
+      <About />
+      {
+        AuthModalOpen && <AuthModal/>
+      }
     </div>
   )
 }
