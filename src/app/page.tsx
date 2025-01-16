@@ -3,8 +3,10 @@ import Navbar from "@/Components/Navbar"
 import Shining from "@/Components/Shining"
 import "./globals.css"
 import Featured from "@/Components/Featured"
+import About from "@/Components/About"
 
 const App = () => {
+
   return (
     <div className="min-h-screen w-full dark:bg-zinc-900 dark:text-[#EFE6DD] text-[#584B53] bg-[#FEF5EF] flex flex-col justify-start items-center ">
       <div className="w-full flex items-center justify-center">
@@ -15,10 +17,10 @@ const App = () => {
           <h1 className="w-[80%] ">Connecting Developers to the </h1>
           <h1 className="w-[60%] flex gap-4 items-center justify-center">Best of <p className="dark:bg-[#FEF5EF] px-5 dark:text-zinc-900  rounded-xl border-2 border-[#584B53]">GitHub</p></h1>
        </div>
-        <div className="text-lg">Search</div>
       </div>
-      <Featured />
       <Shining />
+      <Featured />
+      <About/>
     </div>
   )
 }

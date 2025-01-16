@@ -30,7 +30,7 @@ const Featured = () => {
           </div>
           <div className="grid grid-cols-4 h-full my-5 gap-5">
               <Card Data={dummyData} />
-              <p className='text-zinc-500 font-normal self-center'>* Contact to get featured</p>
+              <p className='text-zinc-500 font-normal self-center'>* <a href="https://x.com/Skmayya1" className='underline'>contact</a> to get featured</p>
           </div>
       </div>
   )
