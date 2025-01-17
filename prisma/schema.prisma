@@ -19,6 +19,9 @@ model users {
   lastName  String?
   kindeID   String  @unique
   picture   String?
+  username  String
+  email     String
+  usedLangs String[] @default([])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
