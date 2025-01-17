@@ -4,13 +4,12 @@ import Shining from "@/Components/Shining"
 import "./globals.css"
 import Featured from "@/Components/Featured"
 import About from "@/Components/About"
-import { useModal } from "@/Contexts/ModalContext"
 import AuthModal from "@/Components/AuthModal"
+import SearchModal from "@/Components/SearchModal"
 
 const App = () => {
-  const { AuthModalOpen ,SearchModalOpen } = useModal();
   return (
-    <div  className={`min-h-screen w-full dark:bg-zinc-900 dark:text-[#EFE6DD] text-[#584B53] bg-[#FEF5EF] flex flex-col justify-start items-center relative ${AuthModalOpen || SearchModalOpen ? 'bg-overlay':''}`}>
+    <div  className='min-h-screen w-full dark:bg-zinc-900 dark:text-[#EFE6DD] text-[#584B53] bg-[#FEF5EF] flex flex-col justify-start items-center relative '>
       <div className="w-full flex items-center justify-center">
         <Navbar />
       </div>
@@ -23,11 +22,28 @@ const App = () => {
       <Shining />
       <Featured />
       <About />
-      {
-        AuthModalOpen && <AuthModal/>
-      }
+      <input type="checkbox" id="my_modal_7" className="modal-toggle" />
+      
+      <div className="modal" role="dialog">
+        <AuthModal />
+        <label className="modal-backdrop" htmlFor="my_modal_7">Close</label>
+      </div>
+      <input type="checkbox" id="search_modal" className="modal-toggle" />
+      <div className="modal " role="dialog">
+        <div className="border border-zinc-700 rounded-lg bg-[#18181B] h-[90vh] w-[150vh]">
+          <div className="h-full w-full p-5 flex flex-col justify-between">
+            <div className="">
+              <SearchModal/>
+            </div>
+            <div className="modal-action">
+              <label htmlFor="search_modal" className="px-4 py-2 text-black bg-[#FEF5EF] cursor-pointer rounded-lg">Close</label>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
 
 export default App
+

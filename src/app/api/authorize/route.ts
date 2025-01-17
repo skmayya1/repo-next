@@ -7,37 +7,30 @@ export async function GET() {
         const { getUser } = getKindeServerSession();
         const user = await getUser();
 
-        if (!user) {
+        if (!user || !user.id || !user.given_name || !user.family_name) {
+            console.error('Invalid user data:', user);
             return NextResponse.redirect("http://localhost:3000");
         }
 
-        console.log(user);
+        console.log('User:', user);
 
         const userDetails = await Prisma.users.upsert({
-            where: {
-                email: user.email as string
-            },
+            where: { kindeID: user.id },
             create: {
-                email: user.email as string,
-                firstName: user.given_name as string,
-                lastName: user.family_name as string,
-                kindeID: user.id as string,
-                picture: user.picture as string,
+                firstName: user.given_name,
+                lastName: user.family_name,
+                kindeID: user.id,
+                picture: user.picture || '',
             },
             update: {
-                firstName: user.given_name as string,
-                lastName: user.family_name as string,
-            }
+                firstName: user.given_name,
+                lastName: user.family_name,
+            },
         });
 
-        if (userDetails) {
-            console.log('User Details', userDetails);
-            return NextResponse.redirect("http://localhost:3000/");
-        } else {
-            return NextResponse.redirect("http://localhost:3000/");
-        }
+        console.log('User Details:', userDetails);
+        return NextResponse.redirect("http://localhost:3000/");
     } catch (error) {
-        console.error('Error:', error);
         return NextResponse.redirect("http://localhost:3000/");
     }
 }
