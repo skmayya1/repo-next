@@ -5,22 +5,12 @@ import { LoginLink, LogoutLink, useKindeBrowserClient } from "@kinde-oss/kinde-a
 import Image from "next/image";
 import { MdLeaderboard } from "react-icons/md";
 import { FaGithub, FaStar } from "react-icons/fa";
-import { useEffect } from "react";
 
 
 const Navbar = () => {
 
 
-  const { user, isLoading ,accessTokenEncoded,getAccessToken,getAccessTokenRaw,getToken } = useKindeBrowserClient()
-
-  useEffect(() => {
-    async function fetchData() { 
-      console.log(await getAccessToken());
-      console.log(await getAccessTokenRaw());
-      console.log(await getToken());
-    }
-    fetchData();
-  }, [accessTokenEncoded, getAccessToken, getAccessTokenRaw, getToken]);
+  const { user, isLoading  } = useKindeBrowserClient()
   
 
   return (

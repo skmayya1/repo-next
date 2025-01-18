@@ -90,23 +90,30 @@ export async function GET() {
         const data = await response.json();
         const repos = data.items;
 
-return NextResponse.json({
-    data: repos.map((item : IProject) => ({
-        id: item.id,
-        name: item.name,
-        full_name: item.full_name,
-        html_url: item.html_url,
-        description: item.description,
-        language: item.language,
-        owner: {
-            avatar_url: item.owner.avatar_url
-        },
-        homepage: item.homepage,
-        stargazers_count: item.stargazers_count,
-        forks_count: item.forks_count,
-        open_issues_count: item.open_issues_count
-    }))
-});
+        // Shuffle the repos array
+        const shuffledRepos = repos.sort(() => 0.5 - Math.random());
+
+        // Take the first 4 items
+        const randomRepos = shuffledRepos.slice(0, 4);
+
+        return NextResponse.json({
+            data: randomRepos.map((item: IProject) => ({
+                id: item.id,
+                name: item.name,
+                full_name: item.full_name,
+                html_url: item.html_url,
+                description: item.description,
+                language: item.language,
+                owner: {
+                    avatar_url: item.owner.avatar_url
+                },
+                homepage: item.homepage,
+                stargazers_count: item.stargazers_count,
+                forks_count: item.forks_count,
+                open_issues_count: item.open_issues_count
+            }))
+        });
+
     
     } catch (error) {
         console.log(error);

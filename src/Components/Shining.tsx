@@ -33,7 +33,6 @@ const Shining = () => {
                 }
                 const data = await res.json();
                 setData(data); // Slice to get top 8 elements
-                console.log(data);
                 
             } catch (err) {
                 console.log(err);

@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { IoMdInformationCircleOutline } from "react-icons/io";
+import { IProject } from './Shining';
+import Card from './Card';
 
 const Suggested = () => {
+    const [Data, setData] = useState<IProject[] | null>(null)
     useEffect(() => {
         const FetchSuggestions = async () => { 
-           // const res = await fetch('/api/suggestions')
-          //  const data = await res.json()
-            
-          //  console.log(data)
+            const res = await fetch('/api/suggestions')
+            const data = await res.json()
+            setData(data.data)
         }
         FetchSuggestions()
     },[])
@@ -26,7 +28,24 @@ const Suggested = () => {
               </p> */}
           </div>
           <div className="grid grid-cols-4 h-full my-5 gap-5">
-              
+              {Data && Data.map((item) => (
+                  <Card
+                      Data={{
+                          id: item.id,
+                          name: item.name,
+                          full_name: item.full_name,
+                          html_url: item.html_url,
+                          description: item.description,
+                          language: item.language,
+                          owner: item.owner,
+                          homepage: item.homepage,
+                          stargazers_count: item.stargazers_count,
+                          forks_count: item.forks_count,
+                          open_issues_count: item.open_issues_count,
+                      }}
+                      key={item.id}
+                  />
+              ))}
           </div>
       </div>  )
 }
