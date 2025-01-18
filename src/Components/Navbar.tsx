@@ -1,7 +1,7 @@
 import { RiGithubFill } from "react-icons/ri";
 import DarkModeToggle from "./Toggle";
 import { IoIosSearch } from "react-icons/io";
-import { LoginLink, LogoutLink, useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
+import { LoginLink, useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Image from "next/image";
 import { MdLeaderboard } from "react-icons/md";
 import { FaGithub, FaStar } from "react-icons/fa";
@@ -48,8 +48,9 @@ const Navbar = () => {
           !isLoading && <div className="flex items-center">
             {
               user ? <div className="">
-                <Image src={user.picture as string} alt="user" width={35} height={35} className="rounded-full cursor-pointer" />
-                <LogoutLink>Logout</LogoutLink>
+                <label htmlFor="profile_modal" className="cursor-pointer">
+                  <Image src={user.picture as string} alt="user" width={35} height={35} className="rounded-full " />
+                </label>
                     </div>
                 :
                 <LoginLink className=" px-2 py-1.5 rounded-lg cursor-pointer hover:bg-[#e2dcd6] transition-all duration-150 ease-in-out  text-black bg-[#FEF5EF] flex items-center gap-2"

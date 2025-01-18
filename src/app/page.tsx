@@ -7,6 +7,7 @@ import About from "@/Components/About"
 import SearchModal from "@/Components/SearchModal"
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs"
 import Suggested from "@/Components/Suggested"
+import ProfileModal from "@/Components/ProfileModal"
 
 const App = () => {
   const { user } = useKindeBrowserClient();
@@ -40,6 +41,13 @@ const App = () => {
             </div>
           </div>
         </div>
+      </div>
+      <input type="checkbox" id="profile_modal" className="modal-toggle" />
+      <div className="modal" role="dialog">
+        <div className="modal-box border border-zinc-700 rounded-lg bg-[#18181B] h-[10vh] w-[30vw]">
+          {user && <ProfileModal user={user} />}
+        </div>
+        <label className="modal-backdrop" htmlFor="profile_modal">Close</label>
       </div>
     </div>
   )

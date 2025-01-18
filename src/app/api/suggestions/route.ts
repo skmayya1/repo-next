@@ -73,7 +73,7 @@ export async function GET() {
             usedLangs = languageNames;
         }
 
-        const apiUrl = `https://api.github.com/search/repositories?q=language:${usedLangs[0]}+stars:500..80000&sort=stars&order=desc`;
+        const apiUrl = `https://api.github.com/search/repositories?q=language:${usedLangs[0]}+stars:500..50000`;
 
         const githubToken = process.env.PAT_TOKEN;
         const response = await fetch(apiUrl, {
@@ -94,7 +94,7 @@ export async function GET() {
         const shuffledRepos = repos.sort(() => 0.5 - Math.random());
 
         // Take the first 4 items
-        const randomRepos = shuffledRepos.slice(0, 4);
+        const randomRepos = shuffledRepos.slice(4, 8);
 
         return NextResponse.json({
             data: randomRepos.map((item: IProject) => ({
