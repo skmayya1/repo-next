@@ -5,12 +5,23 @@ import { LoginLink, LogoutLink, useKindeBrowserClient } from "@kinde-oss/kinde-a
 import Image from "next/image";
 import { MdLeaderboard } from "react-icons/md";
 import { FaGithub, FaStar } from "react-icons/fa";
+import { useEffect } from "react";
 
 
 const Navbar = () => {
 
 
-  const { user, isLoading } = useKindeBrowserClient()
+  const { user, isLoading ,accessTokenEncoded,getAccessToken,getAccessTokenRaw,getToken } = useKindeBrowserClient()
+
+  useEffect(() => {
+    async function fetchData() { 
+      console.log(await getAccessToken());
+      console.log(await getAccessTokenRaw());
+      console.log(await getToken());
+    }
+    fetchData();
+  }, [accessTokenEncoded, getAccessToken, getAccessTokenRaw, getToken]);
+  
 
   return (
     <div className="fixed top-0 left-45 w-[60%] h-[9vh] bg-opacity-60  bg-transparent backdrop-blur-md border-b dark:border-zinc-700 border-[#584B53] flex items-center justify-between px-10 z-50">

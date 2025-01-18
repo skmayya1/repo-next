@@ -10,6 +10,7 @@ import Suggested from "@/Components/Suggested"
 
 const App = () => {
   const { user } = useKindeBrowserClient();
+  
   return (
     <div  className='min-h-screen w-full dark:bg-zinc-900 dark:text-[#EFE6DD] text-[#584B53] bg-[#FEF5EF] flex flex-col justify-start items-center relative '>
       <div className="w-full flex items-center justify-center">
