@@ -7,7 +7,6 @@ const SearchModal = () => {
     <div className='h-full w-full flex items-center justify-center'>
       <QurerySection />
       <Projects />
-
     </div>
   )
 }

@@ -1,19 +1,28 @@
 import { useModal } from '@/Contexts/ModalContext'
 import React from 'react'
 import ProCard from './ProCard'
+import Loading1 from '../Loading'
 
 const Projects = () => {
-    const {RData} = useModal()
+    const {RData,Loading ,Error} = useModal()
   return (
-      <div className=' flex flex-col h-full w-[80%] pl-10 gap-4'>
+      <div className=' flex flex-col h-full w-[80%] pl-10 gap-4 justify-between'>
           <div className="w-full flex items-center justify-between">
               <h1 className='text-xl font-bold text-zinc-400 '>Top Results</h1>
               <div className=""></div>
           </div>
           <div className="gap-5  overflow-y-scroll flex flex-col items-center w-full customized-scrollbar px-3">
-              {RData.map((item) => (
-                  <ProCard Data={item} key={item.id} />
-              ))}
+              {
+                  Loading || Error ? <div className="">
+                      <Loading1 />
+                  </div> : 
+                      <>
+                          {RData.map((item) => (
+                              <ProCard Data={item} key={item.id} />
+                          ))}
+                      </>
+              }
+
           </div>
           <div className="">
               <div className="modal-action">

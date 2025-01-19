@@ -1,44 +1,51 @@
 import { NextResponse } from "next/server";
 
-export async function GET() {
-    const usedLangs = ["TypeScript", "JavaScript", "CSS", "HTML", "Rust"];
+export async function GET(request: Request) {
+    const baseUrl = "https://api.github.com/search/repositories?q=";
+    const token = process.env.PAT_TOKEN;
 
+    const { searchParams } = new URL(request.url);
+    const Query = searchParams.get("query") || "";
+    const selectedLanguages = searchParams.get("languages")?.split(",") || [];
+    const selectedLabels = searchParams.get("labels")?.split(",") || [];
 
-    const apiUrl = `https://api.github.com/search/repositories?q=language:typescript stars:500..100000 &order=desc `;
+    const queryString =
+        Query +
+        (selectedLanguages.length
+            ? selectedLanguages.map((lang) => `+language:${lang}`).join("")
+            : "") +
+        (selectedLabels.length
+            ? selectedLabels.map((label) => `+topic:${label}`).join("")
+            : "");
 
-    const githubToken = process.env.PAT_TOKEN;
+    if (!Query && !selectedLanguages.length && !selectedLabels.length) {
+        return NextResponse.json(
+            { error: "Query, languages, or labels must be provided" },
+            { status: 400 }
+        );
+    }
+
+    const url = `${baseUrl}${queryString}&per_page=100`;
 
     try {
-        const response = await fetch(apiUrl, {
+        const res = await fetch(url, {
             headers: {
-                Authorization: `token ${githubToken}`, // Include token if needed
-                Accept: "application/vnd.github+json"
+                Authorization: `token ${token}`  // Corrected here
             }
         });
-
-        if (!response.ok) {
-            throw new Error(`GitHub API error! Status: ${response.status}`);
+        if (!res.ok) {
+            throw new Error(`Error: ${res.status} - ${res.statusText}`);
         }
 
-        const data = await response.json();
-        console.log(data);
-        
+        const data = await res.json();
+        console.log("Fetched Data:", data);
 
-        // Return repositories as JSON response
-        return NextResponse.json({
-            success: true,
-            repos: data.items.map(repo => ({
-                name: repo.name,
-                stars: repo.stargazers_count,
-                url: repo.html_url,
-            }))
-        });
+        return NextResponse.json(data.items);
     } catch (error) {
-        console.log(error);
-        
-        return NextResponse.json({
-            success: false,
-            message: error
-        }, { status: 500 });
+        console.error("Failed to fetch repositories:", error);
+        return NextResponse.json(
+            { error: error instanceof Error ? error.message : String(error) },
+            { status: 500 }
+        );
     }
 }

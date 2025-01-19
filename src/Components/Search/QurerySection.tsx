@@ -1,13 +1,15 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { GrSearch } from "react-icons/gr";
 import { IoMdAdd } from "react-icons/io";
+import Loading1 from "../Loading";
+import { useModal } from "@/Contexts/ModalContext";
 
 const QuerySection = () => {
     const [tags, setTags] = useState<string[]>([
         "NextJs", "ReactJS", "web3", "Rust", "solana", "ethereum", "blockchain"
     ]);
     const [languages, setLanguages] = useState<string[]>([
-        "Python", "C++", "Java", "Go", "Ruby", "Kotlin", "Swift"
+        "Python", "C", "Java", "Go", "Ruby", "Kotlin", "Swift"
     ]);
     const [labels, setLabels] = useState<string[]>([
         "good first issue", "help wanted", "documentation", "bug", "enhancement"
@@ -20,6 +22,8 @@ const QuerySection = () => {
     const [newItem, setNewItem] = useState("");
     const [inputOpen, setInputOpen] = useState<"tags" | "languages" | "labels" | null>(null);
     const [searchQuery, setSearchQuery] = useState("");
+
+    const { QueryData, Loading } = useModal();
 
     const toggleSelection = (item: string, setSelected: React.Dispatch<React.SetStateAction<string[]>>) => {
         setSelected((prev) =>
@@ -47,6 +51,12 @@ const QuerySection = () => {
     };
 
     useEffect(() => {
+        if (searchQuery.length > 0 || selectedTags.length > 0 || selectedLanguages.length > 0 || selectedLabels.length > 0) {
+            QueryData({ selectedTags, selectedLanguages, selectedLabels, Query: searchQuery });
+        }
+    }, [selectedTags, selectedLanguages, selectedLabels, searchQuery]);
+
+    useEffect(() => {
         const storedTags = localStorage.getItem("tags");
         const storedLanguages = localStorage.getItem("languages");
         const storedLabels = localStorage.getItem("labels");
@@ -68,8 +78,8 @@ const QuerySection = () => {
                         value={searchQuery}
                         onChange={handleSearchChange}
                     />
-                    <button className="p-1 text-zinc-400 hover:text-white">
-                        <GrSearch size={16} />
+                    <button disabled={Loading} className="p-1 text-zinc-400 hover:text-white">
+                        {Loading ? <Loading1 /> : <GrSearch size={16} />}
                     </button>
                 </div>
             </div>
@@ -87,8 +97,8 @@ const QuerySection = () => {
                                 key={item}
                                 onClick={() => toggleSelection(item, setSelected)}
                                 className={`px-2 py-1 text-sm font-light border border-zinc-700 rounded-lg ${selected.includes(item)
-                                        ? "bg-white text-black"
-                                        : "text-zinc-300 hover:bg-zinc-700"
+                                    ? "bg-white text-black"
+                                    : "text-zinc-300 hover:bg-zinc-700"
                                     }`}
                             >
                                 {item}
