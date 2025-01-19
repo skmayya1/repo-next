@@ -36,9 +36,7 @@ const App = () => {
             <div className="h-full w-full">
               <SearchModal/>
             </div>
-            <div className="modal-action">
-              <label htmlFor="search_modal" className="px-4 py-2 text-black bg-[#FEF5EF] cursor-pointer rounded-lg">Close</label>
-            </div>
+
           </div>
         </div>
       </div>

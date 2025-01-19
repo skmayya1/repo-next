@@ -30,10 +30,13 @@ html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: #888 transparent;
+
 }
 
 .customized-scrollbar::-webkit-scrollbar {
   width: 6px;
+    display: none;
+      background: none;
 }
 
 .customized-scrollbar::-webkit-scrollbar-track {
