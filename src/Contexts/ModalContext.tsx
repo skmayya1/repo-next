@@ -55,7 +55,7 @@ export const ModalProvider = ({ children }: AuthProviderProps) => {
         }
         
         const baseUrl = "https://api.github.com/search/repositories?q=";
-        const token = process.env.PAT_TOKEN || "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";
+        const token = process.env.PAT_TOKEN;
         setLoading(true)
         const queryString =
             Query +
