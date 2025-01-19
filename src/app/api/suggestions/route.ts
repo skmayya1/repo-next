@@ -89,12 +89,13 @@ export async function GET() {
 
         const data = await response.json();
         const repos = data.items;
+        
 
         // Shuffle the repos array
         const shuffledRepos = repos.sort(() => 0.5 - Math.random());
 
         // Take the first 4 items
-        const randomRepos = shuffledRepos.slice(4, 8);
+        const randomRepos = shuffledRepos.slice(0, 8);
 
         return NextResponse.json({
             data: randomRepos.map((item: IProject) => ({
@@ -115,9 +116,7 @@ export async function GET() {
         });
 
     
-    } catch (error) {
-        console.log(error);
-        
+    } catch (error) {        
         return NextResponse.json({ error: error }, { status: 500 });
     }
 }

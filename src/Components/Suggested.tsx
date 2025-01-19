@@ -2,14 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { IProject } from './Shining';
 import Card from './Card';
+import { useModal } from '@/Contexts/ModalContext';
 
 const Suggested = () => {
     const [Data, setData] = useState<IProject[] | null>(null)
+    const {setSData} = useModal()
     useEffect(() => {
         const FetchSuggestions = async () => { 
             const res = await fetch('/api/suggestions')
             const data = await res.json()
-            setData(data.data)
+            const trimmedData = data.data.slice(0, 4)
+            setData(trimmedData)
+            setSData(data.data)
         }
         FetchSuggestions()
     },[])

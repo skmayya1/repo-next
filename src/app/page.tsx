@@ -3,11 +3,11 @@ import Navbar from "@/Components/Navbar"
 import Shining from "@/Components/Shining"
 import "./globals.css"
 import Featured from "@/Components/Featured"
-import About from "@/Components/About"
 import SearchModal from "@/Components/SearchModal"
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs"
 import Suggested from "@/Components/Suggested"
 import ProfileModal from "@/Components/ProfileModal"
+import Footer from "@/Components/Footer"
 
 const App = () => {
   const { user } = useKindeBrowserClient();
@@ -28,12 +28,12 @@ const App = () => {
       }
       <Shining />
       <Featured />
-      <About />
+      <Footer />
       <input type="checkbox" id="search_modal" className="modal-toggle" />
       <div className="modal " role="dialog">
         <div className="border border-zinc-700 rounded-lg bg-[#18181B] h-[90vh] w-[150vh]">
           <div className="h-full w-full p-5 flex flex-col justify-between">
-            <div className="">
+            <div className="h-full w-full">
               <SearchModal/>
             </div>
             <div className="modal-action">

@@ -11,6 +11,7 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
 ::-moz-selection {
   color: black;
   background: #EFE6DD;
@@ -18,12 +19,37 @@ html {
 
 ::selection {
   color: black;
-    background: #EFE6DD;
+  background: #EFE6DD;
 }
 
 .bg-overlay {
   background-color: rgba(0, 0, 0, 0.5);
-  /* Semi-transparent overlay */
   pointer-events: none;
+}
+.customized-scrollbar {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #888 transparent;
+}
 
+.customized-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.customized-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 10px;
+}
+
+.customized-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+.customized-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.customized-scrollbar::-webkit-scrollbar-button {
+  display: none;
 }
