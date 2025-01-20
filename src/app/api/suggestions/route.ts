@@ -17,10 +17,10 @@ export async function GET() {
                 username:true
             }
         })
+        
         if (!UserData) return NextResponse.json({ error: "User not found" }, { status: 404 });
 
         let usedLangs = UserData.usedLangs;  //langs \ null is stored if null the langs are fetched through user's repos
-        console.log(usedLangs);
         
         
         if (UserData.usedLangs.length === 0) {
@@ -74,28 +74,33 @@ export async function GET() {
         }
 
         const apiUrl = `https://api.github.com/search/repositories?q=language:${usedLangs[0]}+stars:500..50000`;
-
-        const githubToken = process.env.PAT_TOKEN;
+                
+        const githubToken = process.env.PAT_TOKEN ;
         const response = await fetch(apiUrl, {
             headers: {
-                Authorization: `token ${githubToken}`, // Include token if needed
+                Authorization: `token ${githubToken}`, 
                 Accept: "application/vnd.github+json"
             }
         });
-
+     
         if (!response.ok) {
+            console.log(response);
             throw new Error(`GitHub API error! Status: ${response.status}`);
         }
 
         const data = await response.json();
+        console.log(data);
+        
         const repos = data.items;
         
 
         // Shuffle the repos array
         const shuffledRepos = repos.sort(() => 0.5 - Math.random());
-
+        console.log(shuffledRepos.length);
+        
         // Take the first 4 items
         const randomRepos = shuffledRepos.slice(0, 8);
+        console.log(randomRepos.length);
 
         return NextResponse.json({
             data: randomRepos.map((item: IProject) => ({

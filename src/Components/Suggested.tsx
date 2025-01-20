@@ -13,6 +13,7 @@ const Suggested = () => {
             const data = await res.json()
             const trimmedData = data.data.slice(0, 4)
             setData(trimmedData)
+            console.log(data.data);
             setSData(data.data)
         }
         FetchSuggestions()

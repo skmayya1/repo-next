@@ -30,13 +30,14 @@ export const ModalProvider = ({ children }: AuthProviderProps) => {
     const [AuthModalOpen, setAuthModalOpen] = useState<boolean>(false);
     const [SearchModalOpen, setSearchModalOpen] = useState<boolean>(false);
     const [RData, setRData] = useState<IProject[]>([])
-    const [Loading, setLoading] = useState(false)
+    const [Loading, setLoading] = useState(true)
     const [Error, setError] = useState(false)
     const setAuthModalOpenHandler = (value: boolean) => {
         setAuthModalOpen(value);
     };
     const setSData = (value: IProject[]) => { 
         setRData(value)
+        setLoading(false)
     }
     const setSearchModalOpenHandler = (value: boolean) => {
         setSearchModalOpen(value);
@@ -55,15 +56,15 @@ export const ModalProvider = ({ children }: AuthProviderProps) => {
         }
         
         const baseUrl = "https://api.github.com/search/repositories?q=";
-        const token = process.env.PAT_TOKEN;
+        const token = process.env.NEXT_PUBLIC_PAT_TOKEN;
         setLoading(true)
         const queryString =
             Query +
             (selectedLanguages.length
                 ? selectedLanguages.map((lang) => `+language:${lang}`).join("")
                 : "") +
-            (selectedLabels.length
-                ? selectedLabels.map((label) => `+topic:${label}`).join("")
+            (selectedTags.length
+                ? selectedTags.map((label) => `+topic:${label}`).join("")
                 : "");
         console.log("Query String:", queryString);
         
@@ -72,7 +73,8 @@ export const ModalProvider = ({ children }: AuthProviderProps) => {
         try {
             const res = await fetch(url, {
                 headers: {
-                    Authorization: `token ${token}`  // Corrected here
+                    Authorization: `token ${token}`,
+                    Accept: "application/vnd.github+json",
                 }
             });
             if (!res.ok) {
