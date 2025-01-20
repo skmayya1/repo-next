@@ -15,7 +15,7 @@ const ProfileModal = ({ user }:ProfileModalProps) => {
                   <Image src={user.picture as string} alt="user" width={50} height={50} className="rounded-full " />
                   <h1 className='text-xl'>{user.given_name}</h1>
               </div>
-              <LogoutLink className='bg-white text-black px-4 py-1.5 rounded-lg'>Logout</LogoutLink>
+              <LogoutLink className='bg-white text-black px-4 py-1.5 rounded-lg border border-black'>Logout</LogoutLink>
           </div>
     </div>
   )

@@ -31,18 +31,17 @@ const App = () => {
       <Footer />
       <input type="checkbox" id="search_modal" className="modal-toggle" />
       <div className="modal " role="dialog">
-        <div className="border border-zinc-700 rounded-lg bg-[#18181B] h-[90vh] w-[150vh]">
+        <div className="border border-zinc-700 rounded-lg dark:bg-[#18181B] bg-[#FEF5EF] text-[#584B53] dark:text-zinc-300 h-[90vh] w-[150vh]">
           <div className="h-full w-full p-5 flex flex-col justify-between">
             <div className="h-full w-full">
               <SearchModal/>
             </div>
-
           </div>
         </div>
       </div>
       <input type="checkbox" id="profile_modal" className="modal-toggle" />
       <div className="modal" role="dialog">
-        <div className="modal-box border border-zinc-700 rounded-lg bg-[#18181B] h-[10vh] w-[30vw]">
+        <div className="modal-box border border-zinc-700 rounded-lg dark:bg-[#18181B] bg-[#FEF5EF]  h-[10vh] w-[30vw]">
           {user && <ProfileModal user={user} />}
         </div>
         <label className="modal-backdrop" htmlFor="profile_modal">Close</label>

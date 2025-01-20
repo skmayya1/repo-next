@@ -25,7 +25,6 @@ const Footer = () => {
 export default Footer;
 
 
-//search options
 //Add Tech Stack in profile section
 //lazy and loading and suspense optimizations
 //responsive design

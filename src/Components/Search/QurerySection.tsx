@@ -64,18 +64,18 @@ const QuerySection = () => {
     }, []);
 
     return (
-        <div className="flex flex-col items-center h-full w-[20%] border-r border-zinc-800 py-10 px-3 gap-5 bg-zinc-900 text-white">
+        <div className="flex flex-col items-center h-full w-[20%] border-r border-zinc-800 py-10 px-3 gap-5 dark:bg-zinc-900 dark:text-white">
             {/* Search Section */}
             <div className="w-full">
                 <div className="w-full h-10 border border-zinc-800 rounded-md px-2 flex items-center">
                     <input
-                        className="outline-none bg-transparent w-full text-sm text-white placeholder:text-zinc-500"
+                        className="outline-none bg-transparent w-full text-sm dark:text-white placeholder:text-zinc-500"
                         type="text"
                         placeholder="Search repos"
                         value={searchQuery}
                         onChange={handleSearchChange}
                     />
-                    <button disabled={Loading} className="p-1 text-zinc-400 hover:text-white">
+                    <button disabled={Loading} className="p-1 text-zinc-400 darK:hover:text-white">
                         {Loading ? <Loading1 /> : <GrSearch size={16} />}
                     </button>
                 </div>
@@ -86,7 +86,7 @@ const QuerySection = () => {
                 { title: "Languages", items: languages, selected: selectedLanguages, setSelected: setSelectedLanguages, type: "languages" },
             ].map(({ title, items, selected, setSelected, type }) => (
                 <div key={type} className="w-full">
-                    <p className="text-sm font-medium text-zinc-400 mb-2">{title}</p>
+                    <p className="text-sm font-medium dark:text-zinc-400 mb-2">{title}</p>
                     <div className="flex flex-wrap gap-2">
                         {items.map((item) => (
                             <button
@@ -94,7 +94,7 @@ const QuerySection = () => {
                                 onClick={() => toggleSelection(item, setSelected)}
                                 className={`px-2 py-1 text-sm font-light border border-zinc-700 rounded-lg ${selected.includes(item)
                                     ? "bg-white text-black"
-                                    : "text-zinc-300 hover:bg-zinc-700"
+                                    : "dark:text-zinc-300 text-zinc-700 dark:hover:bg-zinc-700"
                                     }`}
                             >
                                 {item}
@@ -109,7 +109,7 @@ const QuerySection = () => {
                         {inputOpen === type && (
                             <div className="w-full h-8 border border-zinc-800 rounded-md px-2 flex items-center">
                                 <input
-                                    className="outline-none bg-transparent w-full text-sm text-white placeholder:text-zinc-500"
+                                    className="outline-none bg-transparent w-full text-sm dark:text-white placeholder:text-zinc-500"
                                     type="text"
                                     placeholder={`Add new ${title.toLowerCase()}`}
                                     value={newItem}
@@ -117,7 +117,7 @@ const QuerySection = () => {
                                 />
                                 <button
                                     onClick={() => handleAddItem(type)}
-                                    className="p-1 text-zinc-400 hover:text-white"
+                                    className="p-1 text-zinc-400 dark:hover:text-white"
                                 >
                                     Add
                                 </button>
