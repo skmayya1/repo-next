@@ -11,10 +11,12 @@ const Projects = () => {
               <h1 className='text-xl font-bold text-zinc-400 '>Top Results</h1>
               <div className=""></div>
           </div>
-          <div className="gap-5  overflow-y-scroll flex flex-col items-center w-full customized-scrollbar px-3">
+          <div className="gap-5 h-[40vw] overflow-y-scroll flex flex-col items-center w-full customized-scrollbar px-3">
               {
-                  Loading || Error ? <div className="">
-                      <Loading1 />
+                  Loading || Error ? <div className="h-full w-full items-center justify-center flex">
+                      {
+                            Loading ? <Loading1 /> : <h1 className='text-sm font-semibold text-red-500'>Oops! Failed to fetch data</h1>
+                      }
                   </div> : 
                       <>
                           {RData.map((item) => (
@@ -22,7 +24,6 @@ const Projects = () => {
                           ))}
                       </>
               }
-
           </div>
           <div className="">
               <div className="modal-action">

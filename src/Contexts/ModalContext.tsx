@@ -9,14 +9,13 @@ interface AuthContextProps {
     setSearchModalOpenHandler: (value: boolean) => void;
     setSData: (value: IProject[]) => void;
     RData: IProject[];
-    QueryData: ({ selectedTags, selectedLanguages, selectedLabels, Query }: IQueryData) => void;
+    QueryData: ({ selectedTags, selectedLanguages, Query }: IQueryData) => void;
     Loading: boolean;
     Error: boolean;
 }
 interface IQueryData { 
     selectedTags: string[];
     selectedLanguages: string[];
-    selectedLabels: string[];
     Query: string;
 }
 interface AuthProviderProps {
@@ -45,16 +44,10 @@ export const ModalProvider = ({ children }: AuthProviderProps) => {
     const QueryData = async ({
         selectedTags = [],
         selectedLanguages ,
-        selectedLabels ,
         Query = "react",
     }: IQueryData) => {
-        console.log("Query Data:", { selectedTags, selectedLanguages, selectedLabels, Query });
-        if (!Query && !selectedLanguages.length && !selectedLabels.length) {
-            console.error("Query, languages, or labels must be provided");
-            setError(true)
-            return;
-        }
-        
+        console.log("Query Data:", { selectedTags, selectedLanguages, Query });
+        setError(false)
         const baseUrl = "https://api.github.com/search/repositories?q=";
         const token = process.env.NEXT_PUBLIC_PAT_TOKEN;
         setLoading(true)
@@ -77,14 +70,12 @@ export const ModalProvider = ({ children }: AuthProviderProps) => {
                     Accept: "application/vnd.github+json",
                 }
             });
-            if (!res.ok) {
-                console.log(`Error: ${res.status} - ${res.statusText}`);
-                
-            }
             const data = await res.json();
             console.log("Fetched Data:", data);
-            setRData(data.items)
             setLoading(false)
+            if(!res.ok) return setError(true)
+            setRData(data.items)
+
         } catch (error) {
             console.error("Failed to fetch repositories:", error);
             setError(true)

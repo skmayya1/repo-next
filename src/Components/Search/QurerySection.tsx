@@ -9,18 +9,14 @@ const QuerySection = () => {
         "NextJs", "ReactJS", "web3", "Rust", "solana", "ethereum", "blockchain"
     ]);
     const [languages, setLanguages] = useState<string[]>([
-        "Python", "C", "Java", "Go", "Ruby", "Kotlin", "Swift"
-    ]);
-    const [labels, setLabels] = useState<string[]>([
-        "good first issue", "help wanted", "documentation", "bug", "enhancement"
+        "C", "Java", "Go", "Ruby", "Kotlin", "Swift", "cpp", "csharp", "Python"
     ]);
 
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
     const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
-    const [selectedLabels, setSelectedLabels] = useState<string[]>([]);
 
     const [newItem, setNewItem] = useState("");
-    const [inputOpen, setInputOpen] = useState<"tags" | "languages" | "labels" | null>(null);
+    const [inputOpen, setInputOpen] = useState<"tags" | "languages" | null>(null);
     const [searchQuery, setSearchQuery] = useState("");
 
     const { QueryData, Loading } = useModal();
@@ -35,13 +31,13 @@ const QuerySection = () => {
         setSearchQuery((e.target as HTMLInputElement).value);
     };
 
-    const handleAddItem = (type: "tags" | "languages" | "labels") => {
+    const handleAddItem = (type: "tags" | "languages") => {
         if (newItem.trim()) {
-            const setItem = type === "tags" ? setTags : type === "languages" ? setLanguages : setLabels;
-            const updated = type === "tags" ? tags : type === "languages" ? languages : labels;
+            const setItem = type === "tags" ? setTags : setLanguages;
+            const updatedList = type === "tags" ? tags : languages;
 
-            if (!updated.includes(newItem)) {
-                const newList = [...updated, newItem];
+            if (!updatedList.includes(newItem)) {
+                const newList = [...updatedList, newItem];
                 setItem(newList);
                 localStorage.setItem(type, JSON.stringify(newList));
                 setNewItem("");
@@ -50,20 +46,21 @@ const QuerySection = () => {
         }
     };
 
+
     useEffect(() => {
-        if (searchQuery.length > 0 || selectedTags.length > 0 || selectedLanguages.length > 0 || selectedLabels.length > 0) {
-            QueryData({ selectedTags, selectedLanguages, selectedLabels, Query: searchQuery });
+        if (searchQuery.length > 0 || selectedTags.length > 0 || selectedLanguages.length > 0 ) {
+            QueryData({ selectedTags, selectedLanguages, Query: searchQuery });
         }
-    }, [selectedTags, selectedLanguages, selectedLabels, searchQuery]);
+    }, [selectedTags, selectedLanguages, searchQuery]);
+
+
 
     useEffect(() => {
         const storedTags = localStorage.getItem("tags");
         const storedLanguages = localStorage.getItem("languages");
-        const storedLabels = localStorage.getItem("labels");
 
         if (storedTags) setTags(JSON.parse(storedTags));
         if (storedLanguages) setLanguages(JSON.parse(storedLanguages));
-        if (storedLabels) setLabels(JSON.parse(storedLabels));
     }, []);
 
     return (
@@ -87,7 +84,6 @@ const QuerySection = () => {
             {[
                 { title: "Tags", items: tags, selected: selectedTags, setSelected: setSelectedTags, type: "tags" },
                 { title: "Languages", items: languages, selected: selectedLanguages, setSelected: setSelectedLanguages, type: "languages" },
-                { title: "Labels", items: labels, selected: selectedLabels, setSelected: setSelectedLabels, type: "labels" },
             ].map(({ title, items, selected, setSelected, type }) => (
                 <div key={type} className="w-full">
                     <p className="text-sm font-medium text-zinc-400 mb-2">{title}</p>
@@ -105,7 +101,7 @@ const QuerySection = () => {
                             </button>
                         ))}
                         <button
-                            onClick={() => setInputOpen(inputOpen === type ? null : (type as "tags" | "languages" | "labels"))}
+                            onClick={() => setInputOpen(inputOpen === type ? null : (type as "tags" | "languages"))}
                             className="px-2 py-0.5 text-sm font-light border border-zinc-600 rounded-lg"
                         >
                             <IoMdAdd size={15} />
