@@ -3,6 +3,7 @@ import { IProject } from '../Shining'
 import Image from 'next/image'
 import { HiArrowUpRight } from "react-icons/hi2";
 import { GoRepoForked } from 'react-icons/go';
+import { CiStar } from 'react-icons/ci';
 
 const ProCard = ({Data}:{Data:IProject}) => {
   return (
@@ -17,7 +18,8 @@ const ProCard = ({Data}:{Data:IProject}) => {
                       <a href={Data.html_url} className='text-zinc-400 text-sm font-light flex gap-1 items-center hover:text-zinc-500'>{Data.full_name} <HiArrowUpRight size={10} /></a>
                   </div>
               </div>
-              <div className="flex gap-3 w-[50%] dark:  text-zinc-500">
+              <div className="flex gap-3 w-[60%] dark:  text-zinc-500">
+                  <span className='flex items-center gap-1 font-bold border dark:border-zinc-700 border-[#584B53] h-fit  px-1 rounded-lg text-sm '><p className='font-normal'><CiStar/></p>{Data.stargazers_count}</span>
                   <span className='flex items-center gap-1 font-bold border dark:border-zinc-700 border-[#584B53] h-fit  px-1 rounded-lg text-sm '><p className='font-normal'>Open Issues:</p>{Data.open_issues_count}</span>
                   {Data.language && <span className='flex items-center gap-2 border dark:border-zinc-700 border-[#584B53] h-fit w-fit px-1 text-smtext-sm rounded-lg text-sm '>{Data.language}</span>
                   }
