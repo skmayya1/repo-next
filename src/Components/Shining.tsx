@@ -32,12 +32,19 @@ const Shining = () => {
                     throw new Error(`HTTP error! status: ${res.status}`);
                 }
                 const data = await res.json();
+                localStorage.setItem('projects', JSON.stringify(data));
                 setData(data); // Slice to get top 8 elements
                 
             } catch (err) {
                 console.log(err);
                 setError("something went wrong");  
             }
+        }
+        const localData = localStorage.getItem('projects');
+        if (localData) {
+            setData(JSON.parse(localData));
+        } else {
+            FetchData();
         }
         FetchData()
     }, [])

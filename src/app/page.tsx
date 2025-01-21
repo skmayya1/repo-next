@@ -8,9 +8,11 @@ import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs"
 import Suggested from "@/Components/Suggested"
 import ProfileModal from "@/Components/ProfileModal"
 import Footer from "@/Components/Footer"
+import { useModal } from "@/Contexts/ModalContext"
 
 const App = () => {
   const { user } = useKindeBrowserClient();
+  const {RData} = useModal()
   
   return (
     <div  className='min-h-screen w-full dark:bg-zinc-900 dark:text-[#EFE6DD] text-[#584B53] bg-[#FEF5EF] flex flex-col justify-start items-center relative '>
@@ -24,7 +26,7 @@ const App = () => {
        </div>
       </div>
       {
-        user ? <Suggested /> : null
+        user && RData ? <Suggested /> : null
       }
       <Shining />
       <Featured />
