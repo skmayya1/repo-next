@@ -12,6 +12,8 @@ interface AuthContextProps {
     QueryData: ({ selectedTags, selectedLanguages, Query }: IQueryData) => void;
     Loading: boolean;
     Error: boolean;
+    Page:string
+    setPageno: (value: string) => void;
 }
 interface IQueryData { 
     selectedTags: string[];
@@ -31,9 +33,13 @@ export const ModalProvider = ({ children }: AuthProviderProps) => {
     const [RData, setRData] = useState<IProject[]>([])
     const [Loading, setLoading] = useState(true)
     const [Error, setError] = useState(false)
+    const [Page, setPage] = useState('1')
     const setAuthModalOpenHandler = (value: boolean) => {
         setAuthModalOpen(value);
     };
+    const setPageno = (value: string) => { 
+        setPage(value)
+    }
     const setSData = (value: IProject[]) => { 
         setRData(value)
         setLoading(false)
@@ -44,7 +50,7 @@ export const ModalProvider = ({ children }: AuthProviderProps) => {
     const QueryData = async ({
         selectedTags = [],
         selectedLanguages ,
-        Query = "react",
+        Query = "",
     }: IQueryData) => {
         console.log("Query Data:", { selectedTags, selectedLanguages, Query });
         setError(false)
@@ -61,7 +67,7 @@ export const ModalProvider = ({ children }: AuthProviderProps) => {
                 : "");
         console.log("Query String:", queryString);
         
-        const url = `${baseUrl}${queryString}&per_page=100`;
+        const url = `${baseUrl}${queryString}&per_page=30&page=${Page}`;
 
         try {
             const res = await fetch(url, {
@@ -85,7 +91,7 @@ export const ModalProvider = ({ children }: AuthProviderProps) => {
 
 
     return (
-        <AuthContext.Provider value={{ AuthModalOpen,SearchModalOpen,setAuthModalOpenHandler,setSearchModalOpenHandler ,setSData, RData ,QueryData,Loading ,Error}}>
+        <AuthContext.Provider value={{ AuthModalOpen, SearchModalOpen, setAuthModalOpenHandler, setSearchModalOpenHandler, setSData, RData, QueryData,Page,setPageno,Loading ,Error}}>
             {children}
         </AuthContext.Provider>
     );

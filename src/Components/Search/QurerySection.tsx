@@ -19,7 +19,7 @@ const QuerySection = () => {
     const [inputOpen, setInputOpen] = useState<"tags" | "languages" | null>(null);
     const [searchQuery, setSearchQuery] = useState("");
 
-    const { QueryData, Loading } = useModal();
+    const { QueryData, Loading,Page } = useModal();
 
     const toggleSelection = (item: string, setSelected: React.Dispatch<React.SetStateAction<string[]>>) => {
         setSelected((prev) =>
@@ -46,12 +46,11 @@ const QuerySection = () => {
         }
     };
 
-
     useEffect(() => {
         if (searchQuery.length > 0 || selectedTags.length > 0 || selectedLanguages.length > 0 ) {
             QueryData({ selectedTags, selectedLanguages, Query: searchQuery });
         }
-    }, [selectedTags, selectedLanguages, searchQuery]);
+    }, [selectedTags, selectedLanguages, searchQuery, Page]);
 
 
 
