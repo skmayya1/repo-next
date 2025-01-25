@@ -52,7 +52,7 @@ const Shining = () => {
     }
 
     return (
-        <div className="w-[60%] h-[40vw] flex flex-col gap-4">
+        <div className="w-[60%] min-h-[40vw] flex flex-col gap-4">
             <div className="text-xl font-semibold mt-6 flex justify-between w-full">
                 <h1 className="flex gap-2 items-center">
                     Shining Stars

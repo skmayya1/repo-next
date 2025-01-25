@@ -19,7 +19,7 @@ const Suggested = () => {
         FetchSuggestions()
     },[])
   return (
-      <div className="w-[60%] h-[22vw] flex flex-col gap-4">
+      <div className="w-[60%]  min-h-[22vw] flex flex-col gap-4">
           <div className="text-xl font-semibold mt-6 flex justify-between w-full">
               <h1 className="flex gap-2 items-center ">
                   Suggestion
@@ -32,7 +32,7 @@ const Suggested = () => {
                   <IoIosArrowForward size={18} />
               </p> */}
           </div>
-          <div className="grid grid-cols-4 h-full my-5 gap-5">
+          <div className="grid md:grid-cols-4 grid-cols-1 h-full my-5 gap-5">
               {Data && Data.map((item) => (
                   <Card
                       Data={{

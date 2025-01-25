@@ -11,6 +11,7 @@
   "dependencies": {
     "@kinde-oss/kinde-auth-nextjs": "^2.4.6",
     "@prisma/client": "^6.2.1",
+    "@tailwindcss/postcss": "^4.0.0",
     "axios": "^1.7.9",
     "lucide-react": "^0.471.1",
     "next": "15.1.4",
@@ -26,9 +27,9 @@
     "daisyui": "^4.12.23",
     "eslint": "^9",
     "eslint-config-next": "15.1.4",
-    "postcss": "^8",
+    "postcss": "^8.5.1",
     "prisma": "^6.2.1",
-    "tailwindcss": "^3.4.1",
+    "tailwindcss": "^4.0.0",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3"
   }

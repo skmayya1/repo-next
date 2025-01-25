@@ -32,9 +32,9 @@ export default function DarkModeToggle() {
     return (
         <button
             onClick={() => setDarkMode((prev) => !prev)}
-            className="border p-1.5 rounded-lg border-[#584B53] dark:border-zinc-700 antialiased dark:opacity-90 dark:hover:bg-[#2c2b2b]"
+            className="border md:p-1.5 p-1 rounded-lg border-[#584B53] dark:border-zinc-700 antialiased dark:opacity-90 dark:hover:bg-[#2c2b2b]"
         >
-            {darkMode ? <Moon size={22} /> : <Sun size={22} />}
+            {darkMode ? <Moon  size={22} /> : <Sun size={22} />}
         </button>
     );
 }
