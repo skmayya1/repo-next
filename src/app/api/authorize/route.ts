@@ -3,27 +3,42 @@ import Prisma from '@/Utils/Prisma';
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET(req:NextRequest) {
+// Define the types
+interface IdTokenClaims {
+    email: string;
+    profile?: {
+        login?: string;
+        // Add other properties if needed
+    };
+    // Add other properties if needed
+}
+
+interface IdToken {
+    ext_provider?: {
+        claims: IdTokenClaims;
+    };
+}
+
+export async function GET(req: NextRequest) {
     try {
         console.log(req.url);
-        const redirectUrl = new URL('/',req.url).toString();
-        
-        
+        const redirectUrl = new URL('/', req.url).toString();
+
         const { getUser, getIdToken } = getKindeServerSession();
         const user = await getUser();
-        const idToken = await getIdToken();
-
-        console.log('User:', user);
-        console.log('IdToken:', idToken);
+        const idToken = (await getIdToken()) as IdToken; // Cast to IdToken type
 
         if (!user || !user.id || !user.given_name || !user.family_name) {
             console.error('Invalid user data:', user);
             return NextResponse.redirect("http://localhost:3000");
         }
-        console.log(idToken.ext_provider?.claims);
+
+        // Log the profile object to debug
+        console.log('Profile:', idToken.ext_provider?.claims.profile);
 
         const email = idToken.ext_provider?.claims.email as string;
-        const login = idToken.ext_provider?.claims.profile?.login as string || email;        
+        const login = idToken.ext_provider?.claims.profile?.login as string;
+
         console.log('Login:', login);
         console.log('Email:', email);
 
@@ -56,7 +71,7 @@ export async function GET(req:NextRequest) {
         return NextResponse.redirect("http://localhost:3000/");
 
     } catch (error) {
-        console.error('Error:');
-        return NextResponse.redirect("http://localhost:3000/"); 
+        console.error('Error:', error);
+        return NextResponse.redirect("http://localhost:3000/");
     }
 }

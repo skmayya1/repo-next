@@ -89,7 +89,6 @@ export async function GET() {
         }
 
         const data = await response.json();
-        console.log(data);
         
         const repos = data.items;
         
