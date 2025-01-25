@@ -6,10 +6,10 @@ import { useModal } from "@/Contexts/ModalContext";
 
 const QuerySection = () => {
     const [tags, setTags] = useState<string[]>([
-        "NextJs", "ReactJS", "web3", "solana", "ethereum", "blockchain","contract"
+        "NextJs", "ReactJS", "web3", "solana", "ethereum", "blockchain", "contract"
     ]);
     const [languages, setLanguages] = useState<string[]>([
-        "C", "Java", "Go", "Ruby", "Kotlin", "Swift", "cpp", "csharp", "Python","solidity"
+        "C", "Java", "Go", "Ruby", "Kotlin", "Swift", "cpp", "csharp", "Python", "solidity"
     ]);
 
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -19,7 +19,7 @@ const QuerySection = () => {
     const [inputOpen, setInputOpen] = useState<"tags" | "languages" | null>(null);
     const [searchQuery, setSearchQuery] = useState("");
 
-    const { QueryData, Loading,Page } = useModal();
+    const { QueryData, Loading, Page,RData} = useModal();
 
     const toggleSelection = (item: string, setSelected: React.Dispatch<React.SetStateAction<string[]>>) => {
         setSelected((prev) =>
@@ -47,12 +47,10 @@ const QuerySection = () => {
     };
 
     useEffect(() => {
-        if (searchQuery.length > 0 || selectedTags.length > 0 || selectedLanguages.length > 0 ) {
+        if (searchQuery.length > 0 || selectedTags.length > 0 || selectedLanguages.length > 0) {
             QueryData({ selectedTags, selectedLanguages, Query: searchQuery });
         }
     }, [selectedTags, selectedLanguages, searchQuery, Page]);
-
-
 
     useEffect(() => {
         const storedTags = localStorage.getItem("tags");
@@ -63,7 +61,7 @@ const QuerySection = () => {
     }, []);
 
     return (
-        <div className="flex flex-col items-center h-full w-[20%] border-r border-zinc-800 py-10 px-3 gap-5 dark:bg-zinc-900 dark:text-white">
+        <div className="flex flex-col items-center h-full w-full md:w-[20%] md:border-r border-zinc-800 md:py-10 py-3 px-3 gap-5 dark:bg-zinc-900 dark:text-white">
             {/* Search Section */}
             <div className="w-full">
                 <div className="w-full h-10 border border-zinc-800 rounded-md px-2 flex items-center">
@@ -75,7 +73,7 @@ const QuerySection = () => {
                         onChange={handleSearchChange}
                     />
                     <button disabled={Loading} className="p-1 text-zinc-400 darK:hover:text-white">
-                        {Loading ? <Loading1 /> : <GrSearch size={16} />}
+                        {Loading && RData.length !== 0 ? <Loading1 /> : <GrSearch size={16} />}
                     </button>
                 </div>
             </div>

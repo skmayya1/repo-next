@@ -16,7 +16,7 @@ const Navbar = () => {
   
 
   return (
-    <div className="fixed top-0 md:w-[60%] w-[80%] h-[9vh] bg-opacity-60  bg-transparent backdrop-blur-md border-b dark:border-zinc-700 border-[#584B53] flex items-center md:justify-between md:px-10 px-8 justify-between z-49 ">
+    <div className="fixed top-0 md:w-[60%] w-full h-[9vh] bg-opacity-60  bg-transparent backdrop-blur-md border-b dark:border-zinc-700 border-[#584B53] flex items-center md:justify-between md:px-10 px-3  justify-between z-49 ">
       <div className="flex items-center gap-10">
         <h1 className="text-2xl font-medium tracking-wider flex items-end">
           <p className="text-4xl font-bold">R</p>EPOGALLERY

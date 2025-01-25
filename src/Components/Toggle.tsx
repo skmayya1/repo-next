@@ -4,12 +4,17 @@ import { Moon, Sun } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function DarkModeToggle() {
-    const [darkMode, setDarkMode] = useState(false);
+    const [darkMode, setDarkMode] = useState(false); // Default to light mode
 
     useEffect(() => {
-        // Check and set the theme from localStorage when the component mounts
+        // Check for saved theme in localStorage
         const savedTheme = localStorage.getItem("theme");
-        if (savedTheme === "dark") {
+
+        // Check for system preference
+        const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+        // Set the initial theme
+        if (savedTheme === "dark" || (savedTheme === null && systemPrefersDark)) {
             setDarkMode(true);
             document.documentElement.classList.add("dark");
         } else {
@@ -34,7 +39,7 @@ export default function DarkModeToggle() {
             onClick={() => setDarkMode((prev) => !prev)}
             className="border md:p-1.5 p-1 rounded-lg border-[#584B53] dark:border-zinc-700 antialiased dark:opacity-90 dark:hover:bg-[#2c2b2b]"
         >
-            {darkMode ? <Moon  size={22} /> : <Sun size={22} />}
+            {darkMode ? <Moon size={22} /> : <Sun size={22} />}
         </button>
     );
 }
