@@ -8,7 +8,7 @@ import { useSearchParams, usePathname } from 'next/navigation';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 
 const Projects = () => {
-    const { RData, Loading, Error,setPageno } = useModal();
+    const { RData, Loading, Error,setPageno ,setSearchModalOpenHandler } = useModal();
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const currentPage = parseInt(searchParams.get('page') || '1', 10);
@@ -30,7 +30,7 @@ const Projects = () => {
     }, [currentPage, RData]);
 
     return (
-        <div className="flex flex-col h-full w-[80%] pl-10 gap-4 justify-between">
+        <div className="flex flex-col h-[95%] w-full pl-10 gap-4 justify-between">
             <div className="w-full flex items-center justify-between">
                 <h1 className="text-xl font-bold dark:text-zinc-400">Top Results</h1>
             </div>
@@ -65,9 +65,9 @@ const Projects = () => {
                     <FaChevronRight />
                 </button>
             </div>
-            <div className="">
-                <div className="modal-action">
-                    <label htmlFor="search_modal" className="px-4 py-2 text-black dark:bg-[#FEF5EF] border border-[#584B53] cursor-pointer rounded-lg">Close</label>
+            <div className="flex self-end ">
+                <div className="">
+                    <button onClick={()=> setSearchModalOpenHandler(false)} className="px-4 py-2 text-black dark:bg-[#FEF5EF] border border-[#584B53] cursor-pointer rounded-lg">Close</button>
                 </div>
             </div>
         </div>

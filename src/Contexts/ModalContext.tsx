@@ -47,6 +47,7 @@ export const ModalProvider = ({ children }: AuthProviderProps) => {
     const setSearchModalOpenHandler = (value: boolean) => {
         setSearchModalOpen(value);
     };
+
     const QueryData = async ({
         selectedTags = [],
         selectedLanguages ,
