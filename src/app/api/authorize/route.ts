@@ -21,7 +21,6 @@ interface IdToken {
 
 export async function GET(req: NextRequest) {
     try {
-        console.log(req.url);
         const redirectUrl = new URL('/', req.url).toString();
 
         const { getUser, getIdToken } = getKindeServerSession();
@@ -30,7 +29,7 @@ export async function GET(req: NextRequest) {
 
         if (!user || !user.id || !user.given_name || !user.family_name) {
             console.error('Invalid user data:', user);
-            return NextResponse.redirect("http://localhost:3000");
+            return NextResponse.redirect("https://repogallery.tech/");
         }
 
         // Log the profile object to debug
@@ -45,7 +44,7 @@ export async function GET(req: NextRequest) {
         // Ensure login and email are not null or undefined
         if (!login || !email) {
             console.error('Missing login or email data.');
-            return NextResponse.redirect("http://localhost:3000");
+            return NextResponse.redirect("https://repogallery.tech/");
         }
 
         const userDetails = await Prisma.users.upsert({
@@ -68,10 +67,10 @@ export async function GET(req: NextRequest) {
         });
 
         console.log('User Details:', userDetails);
-        return NextResponse.redirect("http://localhost:3000/");
+        return NextResponse.redirect("https://repogallery.tech/");
 
     } catch (error) {
         console.error('Error:', error);
-        return NextResponse.redirect("http://localhost:3000/");
+        return NextResponse.redirect("https://repogallery.tech/");
     }
 }
