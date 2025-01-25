@@ -20,10 +20,10 @@ export async function GET(req:NextRequest) {
             console.error('Invalid user data:', user);
             return NextResponse.redirect("http://localhost:3000");
         }
+        console.log(idToken.ext_provider?.claims);
 
-        const login = idToken.ext_provider?.claims.profile?.login as string;
         const email = idToken.ext_provider?.claims.email as string;
-
+        const login = idToken.ext_provider?.claims.profile?.login as string || email;        
         console.log('Login:', login);
         console.log('Email:', email);
 
