@@ -21,13 +21,13 @@ const ProfileModal = ({ user }: ProfileModalProps) => {
   return (
     // Backdrop that covers the entire screen
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-50"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-opacity-50 backdrop-blur-sm"
       onClick={handleBackdropClick}
     >
       {/* Modal content */}
-      <div className="h-[10%] border border-zinc-500 rounded-xl w-[20%] dark:bg-zinc-800 items-center flex flex-col px-10 py-5">
-        <div className="w-full h-full flex items-center">
-          <div className="w-full flex items-center gap-5">
+      <div className="w-[60vw]  md:w-[30vw]  h-auto p-6 border border-zinc-600 rounded-xl dark:bg-zinc-800 flex flex-col items-center gap-4">
+        <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
             <Image
               src={user.picture as string}
               alt="user"
@@ -35,9 +35,9 @@ const ProfileModal = ({ user }: ProfileModalProps) => {
               height={50}
               className="rounded-full"
             />
-            <h1 className="text-xl">{user.given_name}</h1>
+            <h1 className="text-xl font-medium">{user.given_name}</h1>
           </div>
-          <LogoutLink className="bg-white text-black px-4 py-1.5 rounded-lg border border-black">
+          <LogoutLink className="bg-white text-black px-4 py-1.5 rounded-lg border border-black hover:bg-gray-100 transition-colors duration-150">
             Logout
           </LogoutLink>
         </div>

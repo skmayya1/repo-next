@@ -18,12 +18,12 @@ const Navbar = () => {
   return (
     <div className="fixed top-0 md:w-[60%] w-full h-[9vh] bg-opacity-60  bg-transparent backdrop-blur-md border-b dark:border-zinc-700 border-[#584B53] flex items-center md:justify-between md:px-10 px-3  justify-between z-49 ">
       <div className="flex items-center gap-10">
-        <h1 className="text-2xl font-medium tracking-wider flex items-end">
-          <p className="text-4xl font-bold">R</p>EPOGALLERY
+        <h1 className="md:text-2xl text-xl font-medium tracking-wider flex items-end">
+          <p className="md:text-4xl text-2xl font-bold">R</p>EPOGALLERY
         </h1>
       </div>
  
-      <div className="flex gap-3 items-center ">
+      <div className="flex md:gap-3 gap-2 items-center ">
 
         <button onClick={() => {
           setSearchModalOpenHandler(true)
@@ -49,9 +49,9 @@ const Navbar = () => {
 
         <DarkModeToggle />
         {
-          !isLoading && <div className="flex items-center">
+          !isLoading && <div className="flex items-center   h-full" >
             {
-              user ? <div className="">
+              user ? <div className="flex h-full items-center">
                 <button onClick={
                   () => setAuthModalOpenHandler(true)
                 } className="cursor-pointer">
@@ -59,7 +59,7 @@ const Navbar = () => {
                 </button>
                     </div>
                 :
-                <LoginLink className=" px-2 py-1.5 rounded-lg cursor-pointer hover:bg-[#e2dcd6] transition-all duration-150 ease-in-out  text-black bg-[#FEF5EF] flex items-center gap-2"
+                <LoginLink className=" md:px-2 py-1.5 rounded-lg cursor-pointer hover:bg-[#e2dcd6] transition-all duration-150 ease-in-out  text-black bg-[#FEF5EF] flex items-center md:gap-2 text-sm px-1  gap-1"
                     authUrlParams={{
                       connection_id: process.env.GOOGLE_CONNECTION_ID || "conn_01946e53bb9d7e9dec5c889a81f3f982"
                     }}

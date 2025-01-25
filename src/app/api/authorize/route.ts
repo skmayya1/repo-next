@@ -1,10 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Prisma from '@/Utils/Prisma';
 import { getKindeServerSession } from '@kinde-oss/kinde-auth-nextjs/server';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET() {
+export async function GET(req:NextRequest) {
     try {
+        console.log(req.url);
+        const redirectUrl = new URL('/',req.url).toString();
+        
+        
         const { getUser, getIdToken } = getKindeServerSession();
         const user = await getUser();
         const idToken = await getIdToken();
@@ -53,6 +57,6 @@ export async function GET() {
 
     } catch (error) {
         console.error('Error:');
-        return NextResponse.redirect("http://localhost:3000/");
+        return NextResponse.redirect("http://localhost:3000/"); 
     }
 }

@@ -2,7 +2,7 @@
 import Navbar from "@/Components/Navbar";
 import Shining from "@/Components/Shining";
 import "./globals.css";
-import Featured from "@/Components/Featured";
+//import Featured from "@/Components/Featured";
 import SearchModal from "@/Components/SearchModal";
 import { useKindeBrowserClient } from "@kinde-oss/kinde-auth-nextjs";
 import Suggested from "@/Components/Suggested";
