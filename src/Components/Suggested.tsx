@@ -3,6 +3,7 @@ import { IoMdInformationCircleOutline } from "react-icons/io";
 import { IProject } from './Shining';
 import Card from './Card';
 import { useModal } from '@/Contexts/ModalContext';
+import Loading1 from './Loading';
 
 const Suggested = () => {
     const [Data, setData] = useState<IProject[] | null>(null)
@@ -11,9 +12,11 @@ const Suggested = () => {
         const FetchSuggestions = async () => { 
             const res = await fetch('/api/suggestions')
             const data = await res.json()
+            if (!data) {
+                return
+            }
             const trimmedData = data.data.slice(0, 4)
             setData(trimmedData)
-            console.log(data.data);
             setSData(data.data)
         }
         FetchSuggestions()
@@ -33,7 +36,7 @@ const Suggested = () => {
               </p> */}
           </div>
           <div className="grid md:grid-cols-4 grid-cols-1 h-full my-5 gap-5">
-              {Data && Data.map((item) => (
+              {Data ? Data.map((item) => (
                   <Card
                       Data={{
                           id: item.id,
@@ -50,7 +53,11 @@ const Suggested = () => {
                       }}
                       key={item.id}
                   />
-              ))}
+              )) :
+                  <div className="w-full h-full flex items-center justify-center">
+                      <Loading1 />  
+               </div>
+              }
           </div>
       </div>  )
 }
