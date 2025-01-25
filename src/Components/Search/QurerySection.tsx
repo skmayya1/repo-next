@@ -6,10 +6,10 @@ import { useModal } from "@/Contexts/ModalContext";
 
 const QuerySection = () => {
     const [tags, setTags] = useState<string[]>([
-        "NextJs", "ReactJS", "web3", "Rust", "solana", "ethereum", "blockchain"
+        "NextJs", "ReactJS", "web3", "solana", "ethereum", "blockchain","contract"
     ]);
     const [languages, setLanguages] = useState<string[]>([
-        "C", "Java", "Go", "Ruby", "Kotlin", "Swift", "cpp", "csharp", "Python"
+        "C", "Java", "Go", "Ruby", "Kotlin", "Swift", "cpp", "csharp", "Python","solidity"
     ]);
 
     const [selectedTags, setSelectedTags] = useState<string[]>([]);

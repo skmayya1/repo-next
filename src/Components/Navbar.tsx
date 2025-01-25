@@ -14,7 +14,7 @@ const Navbar = () => {
   
 
   return (
-    <div className="fixed top-0 left-45 w-[60%] h-[9vh] bg-opacity-60  bg-transparent backdrop-blur-md border-b dark:border-zinc-700 border-[#584B53] flex items-center justify-between px-10 z-50">
+    <div className="fixed top-0 left-45 md:w-[60%] w-[80%] h-[9vh] bg-opacity-60  bg-transparent backdrop-blur-md border-b dark:border-zinc-700 border-[#584B53] flex items-center md:justify-between md:px-10 px-24 z-50 ">
       <div className="flex items-center gap-10">
         <h1 className="text-2xl font-medium tracking-wider flex items-end">
           <p className="text-4xl font-bold">R</p>EPOGALLERY
@@ -25,16 +25,16 @@ const Navbar = () => {
 
         <label htmlFor="search_modal" className="px-4 flex gap-2 items-center border rounded-lg py-1.5 dark:text-zinc-400 border-[#584B53] dark:border-zinc-700 cursor-pointer dark:hover:bg-[#2c2b2b]">
           <IoIosSearch size={18} />
-          <p className="tracking-tight font-medium text-sm opacity-75">Find the right open-source repo</p>
+          <p className="tracking-tight font-medium text-sm opacity-75 md:block hidden">Find the right open-source repo</p>
         </label>
-        <button className="border p-1.5 rounded-lg border-[#584B53] dark:border-zinc-700 dark:hover:bg-[#2c2b2b] group flex items-center gap-2 transition-all duration-500 ease-in-out overflow-hidden w-[40px] hover:w-[150px]">
+        <button className="border p-1.5 rounded-lg border-[#584B53] dark:border-zinc-700 dark:hover:bg-[#2c2b2b] group  items-center gap-2 transition-all duration-500 ease-in-out overflow-hidden w-[40px] hover:w-[150px] md:flex hidden">
           <RiGithubFill size={22} className="flex-shrink-0" />
-          <span className="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-500 ease-in-out flex items-center gap-2">
+          <span className="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-500 ease-in-out md:flex items-center gap-2 hidden">
             Star Repo <FaStar size={15} className="inline" />
           </span>
         </button>
 
-        <div className="tooltip tooltip-bottom tooltip-info" data-tip="coming soon!" >
+        <div className="tooltip tooltip-bottom tooltip-info md:flex hidden" data-tip="coming soon!" >
         <button className="border p-1.5 rounded-lg border-[#584B53] dark:border-zinc-700 dark:hover:bg-[#2c2b2b] group flex items-center gap-2 transition-all duration-500 ease-in-out overflow-hidden w-[40px] hover:w-[150px] cursor-no-drop">
           <MdLeaderboard size={22} className="flex-shrink-0" />
           <span className="opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity duration-500 ease-in-out">

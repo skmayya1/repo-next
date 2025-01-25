@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { GiFallingStar } from "react-icons/gi";
-import { IoIosArrowForward } from "react-icons/io";
 import Card from "./Card";
-import Link from "next/link";
 
 export interface IProject {
     id: number,
@@ -60,10 +58,6 @@ const Shining = () => {
                     Shining Stars
                     <GiFallingStar className="-rotate-90" size={25} color="yellow" />
                 </h1>
-                <Link href='/projects' className="font-light text-base flex items-center cursor-pointer gap-1">
-                    View More
-                    <IoIosArrowForward size={18} />
-                </Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-4 h-full  my-5 gap-5">
                 {Data && Data.map((item) => (
