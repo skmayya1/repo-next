@@ -10,10 +10,11 @@ import ProfileModal from "@/Components/ProfileModal";
 import Footer from "@/Components/Footer";
 import { useModal } from "@/Contexts/ModalContext";
 import { useEffect } from "react";
+import { IoIosSearch } from "react-icons/io";
 
 const App = () => {
   const { user } = useKindeBrowserClient();
-  const { RData, AuthModalOpen, SearchModalOpen } = useModal();
+  const { RData, AuthModalOpen, SearchModalOpen ,setSearchModalOpenHandler} = useModal();
 
   // Prevent background scrolling when modals are open
   useEffect(() => {
@@ -57,6 +58,14 @@ const App = () => {
               GitHub
             </p>
           </h1>
+        </div>
+        <div className="text-xl md:hidden flex">
+          <button onClick={() => {
+            setSearchModalOpenHandler(true)
+          }} className="md:px-4 p-1 flex gap-2 items-center border rounded-lg py-1.5 dark:text-white  md:dark:text-zinc-400 border-[#584B53] dark:border-zinc-700 cursor-pointer dark:hover:bg-[#2c2b2b]">
+            <IoIosSearch  size={22} />
+            <p className="tracking-tight font-medium text-sm opacity-75 block ">Find the right open-source repo</p>
+          </button>
         </div>
       </div>
 
