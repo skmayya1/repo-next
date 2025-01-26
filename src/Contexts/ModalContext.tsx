@@ -53,7 +53,7 @@ export const ModalProvider = ({ children }: AuthProviderProps) => {
         selectedLanguages ,
         Query = "",
     }: IQueryData) => {
-        console.log("Query Data:", { selectedTags, selectedLanguages, Query });
+       // console.log("Query Data:", { selectedTags, selectedLanguages, Query });
         setError(false)
         const baseUrl = "https://api.github.com/search/repositories?q=";
         const token = process.env.NEXT_PUBLIC_PAT_TOKEN;
@@ -66,7 +66,7 @@ export const ModalProvider = ({ children }: AuthProviderProps) => {
             (selectedTags.length
                 ? selectedTags.map((label) => `+topic:${label}`).join("")
                 : "");
-        console.log("Query String:", queryString);
+       // console.log("Query String:", queryString);
         
         const url = `${baseUrl}${queryString}&per_page=30&page=${Page}`;
 
@@ -78,7 +78,7 @@ export const ModalProvider = ({ children }: AuthProviderProps) => {
                 }
             });
             const data = await res.json();
-            console.log("Fetched Data:", data);
+          //  console.log("Fetched Data:", data);
             setLoading(false)
             if(!res.ok) return setError(true)
             setRData(data.items)

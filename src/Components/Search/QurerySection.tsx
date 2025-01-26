@@ -9,7 +9,7 @@ const QuerySection = () => {
         "NextJs", "ReactJS", "web3", "solana", "ethereum", "blockchain", "contract"
     ]);
     const [languages, setLanguages] = useState<string[]>([
-        "C", "Java", "Go", "Ruby", "Kotlin", "Swift", "cpp", "csharp", "Python", "solidity"
+        "C", "Java", "Go", "Ruby", "Kotlin", "Swift", "cpp", "csharp", "Python", "solidity","Typescript"
     ]);
 
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
