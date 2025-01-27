@@ -1,7 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { GrSearch } from "react-icons/gr";
 import { IoMdAdd } from "react-icons/io";
-import Loading1 from "../Loading";
 import { useModal } from "@/Contexts/ModalContext";
 
 const QuerySection = () => {
@@ -9,7 +8,7 @@ const QuerySection = () => {
         "NextJs", "ReactJS", "web3", "solana", "ethereum", "blockchain", "contract"
     ]);
     const [languages, setLanguages] = useState<string[]>([
-        "C", "Java", "Go", "Ruby", "Kotlin", "Swift", "cpp", "csharp", "Python", "solidity","Typescript"
+        "C", "Java", "Go", "Ruby", "Kotlin", "Swift", "cpp", "csharp", "Python", "solidity", "Typescript"
     ]);
 
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -19,7 +18,7 @@ const QuerySection = () => {
     const [inputOpen, setInputOpen] = useState<"tags" | "languages" | null>(null);
     const [searchQuery, setSearchQuery] = useState("");
 
-    const { QueryData, Loading, Page,RData} = useModal();
+    const { QueryData, Loading, Page, RData } = useModal();
 
     const toggleSelection = (item: string, setSelected: React.Dispatch<React.SetStateAction<string[]>>) => {
         setSelected((prev) =>
@@ -73,7 +72,7 @@ const QuerySection = () => {
                         onChange={handleSearchChange}
                     />
                     <button disabled={Loading} className="p-1 text-zinc-400 darK:hover:text-white">
-                        {Loading && RData.length !== 0 ? <Loading1 /> : <GrSearch size={16} />}
+                        {Loading && RData.length !== 0 ? "" : <GrSearch size={16} />}
                     </button>
                 </div>
             </div>

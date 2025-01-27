@@ -3,7 +3,7 @@ import { IoMdInformationCircleOutline } from "react-icons/io";
 import { IProject } from './Shining';
 import Card from './Card';
 import { useModal } from '@/Contexts/ModalContext';
-import Loading1 from './Loading';
+import Skeleton from './Skeleton';
 
 const Suggested = () => {
     const [Data, setData] = useState<IProject[] | null>(null)
@@ -36,29 +36,31 @@ const Suggested = () => {
               </p> */}
           </div>
           <div className="grid md:grid-cols-4 grid-cols-1 h-full my-5 gap-5">
-              {Data ? Data.map((item) => (
-                  <Card
-                      Data={{
-                          id: item.id,
-                          name: item.name,
-                          full_name: item.full_name,
-                          html_url: item.html_url,
-                          description: item.description,
-                          language: item.language,
-                          owner: item.owner,
-                          homepage: item.homepage,
-                          stargazers_count: item.stargazers_count,
-                          forks_count: item.forks_count,
-                          open_issues_count: item.open_issues_count,
-                      }}
-                      key={item.id}
-                  />
-              )) :
-                  <div className="w-full h-full flex items-center justify-center">
-                      <Loading1 />  
-               </div>
-              }
+              {Data ? (
+                  Data.map((item) => (
+                      <Card
+                          Data={{
+                              id: item.id,
+                              name: item.name,
+                              full_name: item.full_name,
+                              html_url: item.html_url,
+                              description: item.description,
+                              language: item.language,
+                              owner: item.owner,
+                              homepage: item.homepage,
+                              stargazers_count: item.stargazers_count,
+                              forks_count: item.forks_count,
+                              open_issues_count: item.open_issues_count,
+                          }}
+                          key={item.id}
+                      />
+                  ))
+              ) : (
+                  // Render 4 Skeletons as placeholders
+                  Array.from({ length: 4 }).map((_, index) => <Skeleton key={index} />)
+              )}
           </div>
+
       </div>  )
 }
 

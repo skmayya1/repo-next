@@ -80,7 +80,6 @@ const App = () => {
 
       {/* Footer */}
       <Footer />
-
       {/* Modals */}
       {AuthModalOpen && user ? <ProfileModal user={user} /> : null}
       {SearchModalOpen ? <SearchModal /> : null}
